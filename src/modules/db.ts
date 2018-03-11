@@ -1,4 +1,6 @@
 import * as firebase from 'firebase';
+import {store} from './store';
+import {userAuth, userUnAuth} from './user/user-actions';
 
 const config = {
   apiKey: 'AIzaSyBlqIU27E8ca7SWzUtn3tsgEtVOoWNefT4',
@@ -14,18 +16,17 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in.
-    console.log('USER', {...user});
+    store.dispatch(userAuth(user))
   } else {
     // User is signed out.
-    console.log('User is signed out');
+    store.dispatch(userUnAuth())
   }
 });
 
-firebase.auth().signInAnonymously().catch(function (error) {
+firebase.auth().signInAnonymously().catch((error: any) => {
   // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
+  const errorCode = error.code;
+  const errorMessage = error.message;
 
   console.log('ERR', errorMessage);
 });

@@ -14,9 +14,11 @@ export const reducers = combineReducers({
   user
 });
 
-export const configureStore = () => {
-    return createStore(reducers, composeWithDevTools(
-        applyMiddleware(thunkMiddleware)
-        // other store enhancers if any
-    ));
+const configureStore = () => {
+  return createStore(reducers, composeWithDevTools(
+    applyMiddleware(thunkMiddleware)
+    // other store enhancers if any
+  ));
 };
+
+export const store = configureStore();
