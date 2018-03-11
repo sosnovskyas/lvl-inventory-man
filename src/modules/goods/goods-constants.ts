@@ -1,0 +1,1 @@
+export const GOODS_FEATCH = 'goods/FEATCH';
