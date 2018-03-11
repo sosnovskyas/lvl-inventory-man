@@ -3,6 +3,10 @@ import {Action} from 'redux';
 export interface IGoodsItem {
   name: string;
   key: string;
+  images: {
+    [key: string]: string;
+  },
+  desctiption: string;
 }
 
 export interface IGoodsState {

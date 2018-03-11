@@ -7,16 +7,10 @@ export const GoodsList = (props: any) => {
 
   if (isLoading !== undefined && isLoading) {
     return (
-      <ul>
-        <span>loading...</span>
-      </ul>
+      <div>loading...</div>
     );
   } else if (list !== undefined && list) {
-    return (
-      <ul>
-        {list.map((item: IGoodsItem, index: string) => <GoodsListItem key={item.key} item={item}/>)}
-      </ul>
-    );
+    return (list.map((item: IGoodsItem) => <GoodsListItem key={item.key} item={item}/>))
   } else {
     return (<span>%(</span>)
   }
