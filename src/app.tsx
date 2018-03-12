@@ -16,6 +16,7 @@ export interface IAppState {
 interface IAppProps extends DispatchProp<any> {
   goods: IGoodsState;
   user: IUserState;
+  history: any;
 }
 
 class App extends React.Component<IAppProps, IAppState> {
@@ -24,9 +25,9 @@ class App extends React.Component<IAppProps, IAppState> {
     console.log('AppPops', props);
   }
 
-  private create() {
-    Goods.push({name: `${random(1, 10)}`});
-  }
+  private onItemClick = (key: string): void => {
+    this.props.history.push({pathname: `/goods/${key}`});
+  };
 
   public componentWillMount() {
     Goods.on('value', (snapshot: any) => {
@@ -37,8 +38,7 @@ class App extends React.Component<IAppProps, IAppState> {
   public render() {
     return (
       <React.Fragment>
-        <Button onClick={() => this.create()}>create</Button>
-        <GoodsList goods={this.props.goods} />
+        <GoodsList goods={this.props.goods} onItemClick={this.onItemClick}/>
       </React.Fragment>
     )
   }

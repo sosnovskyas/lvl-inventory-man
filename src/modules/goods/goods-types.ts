@@ -6,12 +6,13 @@ export interface IGoodsItem {
   images: {
     [key: string]: string;
   },
-  desctiption: string;
+  description: string;
 }
 
 export interface IGoodsState {
   isLoading: boolean;
   list: IGoodsItem[];
+  new: IGoodsItem;
 }
 
 export interface IGoodsAction extends Action {

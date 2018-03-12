@@ -1,7 +1,10 @@
 import * as React from 'react';
 import {values} from 'lodash';
-import {Typography, Button, Card, CardActions, CardContent, CardMedia} from 'material-ui';
 import {IGoodsItem} from '../modules/goods/goods-types';
+import {
+  TableCell,
+  TableRow
+} from 'material-ui';
 
 const ImagesList = (props: { list: { [key: string]: string } }) => {
   const {list} = props;
@@ -17,25 +20,19 @@ const ImagesList = (props: { list: { [key: string]: string } }) => {
   );
 };
 
-export const GoodsListItem = (props: { item: IGoodsItem }) => {
-  const {item} = props;
+interface IGoodsListItemProps {
+  item: IGoodsItem;
+  click(key: string): void;
+}
+
+export const GoodsListItem = (props: IGoodsListItemProps): React.ReactElement<IGoodsListItemProps> => {
+  const {key, description, name} = props.item;
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="headline" component="h2">{item.name}</Typography>
-        <Typography component="p">{item.desctiption}</Typography>
-      </CardContent>
-      {/*<CardMedia
-        src={item.imageUrl}
-        title={item.imageUrl}
-      >qwe</CardMedia>*/}
-      <ImagesList list={item.images}/>
-      <CardActions>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  )
+    <TableRow onClick={() => props.click(key)}>
+      <TableCell>{key}</TableCell>
+      <TableCell>{name}</TableCell>
+      <TableCell>{description}</TableCell>
+    </TableRow>
+  );
 };
